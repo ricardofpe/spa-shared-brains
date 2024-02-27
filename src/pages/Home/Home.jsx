@@ -1,3 +1,16 @@
+import Navbar from "../../components/Navbar/Navbar";
+
+
 export default function Home(){
-    return <h1>Shared Brains</h1>
+    return(
+        <>
+
+          <Navbar/>
+ 
+  
+           
+  
+      </>
+         
+    )
 }
