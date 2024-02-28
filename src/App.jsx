@@ -1,5 +1,5 @@
 
-import './App.css'
+
 import { GlobalStyle } from './GlobalStyled'
 import Home from './pages/Home/Home'
 
