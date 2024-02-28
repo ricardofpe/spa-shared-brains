@@ -1,33 +1,32 @@
-nav{
-    display: flex;
-    justify-content: space-between;
+import styled from "styled-components"
+
+export const Nav = styled.nav`
+ display: flex;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
-    padding: 0 5rem;
+    
     position: fixed;
     top: 0;
     background-color: white;
     z-index: 1;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;;
-}
-
-img{
-    max-width: 10rem;
+`
+export const ImageLogo = styled.img`
+max-width: 10rem;
    
-    object-fit: cover;
-    cursor: pointer;
-}
+   object-fit: cover;
+   cursor: pointer;
+`
 
-.input-search{
-    position: relative;
+export const InputSearch = styled.div`
+   position: relative;
     width: 200px;
     display: flex;
     align-items: center;
 
-}
-
-i.bi-search{
-    position: absolute;
+    i{
+        position: absolute;
     top: 1;
     right: 0.2rem;
     z-index: 10;
@@ -36,29 +35,27 @@ i.bi-search{
     color: gray;
     border-radius: 0.3rem;
     padding: 0.5rem;
-}
+    }
 
-.input-search > input {
-    outline: none;
+    input{
+
+        outline: none;
     font-size: 0.9rem;
     padding: 0.6rem;
     background-color: #f5f5f5;
     border: none;
     width: 100%;
     border-radius: 0.3rem;
-}
 
-.input-search > input:focus{
+   &:focus{
     border: #00e3f8 1px solid;
 }
 
-.container-button{
-    width: 200px;
-    display: flex;
-    justify-content: center;
-}
+    }
 
-button{
+`
+
+export const Button = styled.button`
 background-color: #2643d4;
 border: none;
 outline: none;
@@ -68,12 +65,13 @@ color: white;
 transition: all 0.4s ease-in-out;
 cursor: pointer;
 border-radius: 0.3rem;
-
+width: 200px;
 font-weight: 500;
 letter-spacing: 0.1rem;
 text-transform: uppercase;
-}
 
-button:hover {
+&:hover {
     background-color: #00e3f8;
   }
+
+`

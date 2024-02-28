@@ -1,25 +1,29 @@
 import logo from "../../assets/shared-brains-logo.png";
-import "./Navbar.css"
+import { Button, ImageLogo, InputSearch, Nav } from "./NavbarStyled";
+
 
 export default function Navbar() {
   return (
     <>
-      <nav>
-        <div className="input-search">
+      <Nav>
+        <InputSearch className="input-search">
         <i className="bi bi-search"></i>
           <input placeholder="Pesquise por um título" type="text" />
-        </div>
+        </InputSearch>
 
-<div className="container-logo">
-        <img src={logo} alt="Logo Shared Brains" />
+
+        <ImageLogo src={logo} alt="Logo Shared Brains" />
        
-        </div>
-<div className="container-button">
-        <button>
+      
+
+        <Button >
             Entrar
-        </button>
-        </div>
-      </nav>
+        </Button>
+     
+      </Nav>
     </>
   );
 }
+
+
+
