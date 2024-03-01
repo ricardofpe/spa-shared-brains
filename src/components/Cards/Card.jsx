@@ -1,21 +1,31 @@
 /* eslint-disable react/prop-types */
-import { Section } from "./CardStyle"
+import { CardContainer , ContainerLikeandComment} from "./CardStyle";
 
-
-
-function Card({thoughts}) {
+function Card({ thoughts }) {
   return (
+    <CardContainer>
+      <article>
+        <div>
+          <h2>{thoughts.title}</h2>
+          <p>{thoughts.text}</p>
+          <span>By userName</span>
+        </div>
+      </article>
 
-    <Section>
-        <h2>{thoughts.title}</h2>
-        <p>{thoughts.text}</p>
+      <ContainerLikeandComment>
+        <div>
         <i className="bi bi-heart"></i>
         <span>{thoughts.likes}</span>
+        </div>
+
+        <div>
         <i className="bi bi-chat"></i>
         <span>{thoughts.comments}</span>
-    </Section>
-
-  )
+        </div>
+      
+      </ContainerLikeandComment>
+    </CardContainer>
+  );
 }
 
-export default Card
+export default Card;
