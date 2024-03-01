@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CardContainer = styled.section`
   display: flex;
-  align-items: end;
+  align-items: start;
   position: relative;
   top: 200px;
   flex-direction: column;
@@ -28,18 +28,24 @@ export const CardContainer = styled.section`
  
   }
 
+  .date{
+    margin-top: 0.6rem ;
+  }
+
 `;
 
 export const ContainerLikeandComment = styled.section`
   display: flex;
   align-items: center;
   gap: 1rem;
+  align-self: flex-end;
 
 div{
     display: flex;
     align-items: center;
     gap:0.2rem;
     margin-top: 0.4rem;
+ 
 }
 
 

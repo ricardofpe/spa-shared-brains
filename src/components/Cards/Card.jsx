@@ -1,28 +1,33 @@
 /* eslint-disable react/prop-types */
-import { CardContainer , ContainerLikeandComment} from "./CardStyle";
+import { CardContainer, ContainerLikeandComment } from "./CardStyle";
+import { format } from 'date-fns';
 
-function Card({ thoughts }) {
+
+function Card({ title, text, username, likes, comments, createdAt }) {
+
+  const formattedDate = format(new Date(createdAt), 'dd/MM/yyyy');
+
   return (
     <CardContainer>
       <article>
         <div>
-          <h2>{thoughts.title}</h2>
-          <p>{thoughts.text}</p>
-          <span>By userName</span>
+          <h2>{title}</h2>
+          <p>{text}</p>
+          <span>By {username}</span>
+          <p className="date">Date: {formattedDate}</p>
         </div>
       </article>
 
       <ContainerLikeandComment>
         <div>
-        <i className="bi bi-heart"></i>
-        <span>{thoughts.likes}</span>
+          <i className="bi bi-heart"></i>
+          <span>{likes}</span>
         </div>
 
         <div>
-        <i className="bi bi-chat"></i>
-        <span>{thoughts.comments}</span>
+          <i className="bi bi-chat"></i>
+          <span>{comments}</span>
         </div>
-      
       </ContainerLikeandComment>
     </CardContainer>
   );
