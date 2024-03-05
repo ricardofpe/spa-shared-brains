@@ -1,34 +1,47 @@
 /* eslint-disable react/prop-types */
-import { CardContainer, ContainerLikeandComment } from "./CardStyle";
-import { format } from 'date-fns';
+import TextLimit from "../TextLimit/TextLimit";
+import { CardContainer, CardThought, ContainerCardFooter, ContainerDataandByUser, ContainerLikeandComment } from "./CardStyle";
+
+function Card({ title, text, username, likes, comments, createdAt, top }) {
+
+  const dateObject = new Date(createdAt);
 
 
-function Card({ title, text, username, likes, comments, createdAt }) {
+  const day = String(dateObject.getDate()).padStart(2, '0');
+  const month = String(dateObject.getMonth() + 1).padStart(2, '0'); 
+  const year = dateObject.getFullYear();
 
-  const formattedDate = format(new Date(createdAt), 'dd/MM/yyyy');
+
+  const formattedDate = `${day}/${month}/${year}`;
 
   return (
-    <CardContainer>
-      <article>
+    <CardContainer >
+      <CardThought top={top} >
         <div>
           <h2>{title}</h2>
-          <p>{text}</p>
+          <TextLimit text={text} limit={150}/>
+          
+        </div>
+      </CardThought>
+
+
+
+
+      <ContainerCardFooter  >
+
+      <ContainerDataandByUser top={top} >
           <span>By {username}</span>
           <p className="date">Date: {formattedDate}</p>
-        </div>
-      </article>
-
-      <ContainerLikeandComment>
-        <div>
-          <i className="bi bi-heart"></i>
-          <span>{likes}</span>
-        </div>
-
-        <div>
+        </ContainerDataandByUser>
+       
+         <ContainerLikeandComment>
+          
+        <i className="bi bi-heart"></i>
+          <span>{likes?.length}</span>
           <i className="bi bi-chat"></i>
-          <span>{comments}</span>
-        </div>
-      </ContainerLikeandComment>
+          <span>{comments?.length}</span>
+        </ContainerLikeandComment>
+      </ContainerCardFooter>
     </CardContainer>
   );
 }

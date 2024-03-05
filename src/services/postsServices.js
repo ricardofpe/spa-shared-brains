@@ -7,3 +7,9 @@ export function findAllThoughts(){
     return response
     
 }
+
+export function getTopThought(){
+    const response = axios.get(`${baseURL}/thoughts/top`)
+    return response
+    
+}

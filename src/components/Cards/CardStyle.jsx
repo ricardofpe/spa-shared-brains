@@ -10,43 +10,43 @@ export const CardContainer = styled.section`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   padding: 1rem 2rem;
   border-radius: 0.3rem;
+ width: 100%;
+
+
+`;
+
+    
+  export const CardThought = styled.article`
+  
+
 
   h2{
+    font-size: ${(thoughts) => (thoughts.top ? "3rem" : "1.8rem")};
     padding-bottom: 1rem;
   }
 
   p{
-
+    font-size: ${(thoughts) => (thoughts.top ? "1.2rem" : "1rem")};
+   
     padding-bottom: 0.6em;
-    
   }
 
-  span{
-    color: gray;
-    font-weight: 500;
 
- 
-  }
 
-  .date{
-    margin-top: 0.6rem ;
-  }
 
-`;
+  `
+  
+  
 
-export const ContainerLikeandComment = styled.section`
+export const ContainerCardFooter = styled.section`
   display: flex;
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  align-self: flex-end;
 
-div{
-    display: flex;
-    align-items: center;
-    gap:0.2rem;
-    margin-top: 0.4rem;
  
-}
+
+
 
 
 span{
@@ -61,5 +61,44 @@ span{
 
 
 
-
 `;
+
+export const ContainerDataandByUser = styled.div`
+
+  display: flex;
+  align-items: start;
+
+  flex-direction: column;
+
+.date{
+    margin-top: 0.2rem ;
+    font-size: ${(thoughts) => (thoughts.top ? "1rem" : "0.8rem")};
+  }
+
+
+  
+  span{
+    color: gray;
+    font-weight: 500;
+    font-size: ${(thoughts) => (thoughts.top ? "1rem" : "0.8rem")};
+ 
+  }
+
+
+`
+export const ContainerLikeandComment = styled.div`
+
+div{
+    display: flex;
+ 
+    align-items: center;
+
+ 
+}
+
+i{
+  padding: .4rem;
+}
+
+
+`

@@ -1,28 +1,42 @@
 import Card from "../../components/Cards/Card";
 import Navbar from "../../components/Navbar/Navbar";
-import { findAllThoughts } from "../../services/postsServices";
-import { HomeBody } from "./HomeStyled";
-import { useState } from "react";
+import { findAllThoughts, getTopThought } from "../../services/postsServices";
+import { HomeBody, HomeHeader } from "./HomeStyled";
+import { useState, useEffect } from "react";
 
-// ... outras importações
 
-import { useEffect } from "react";
 
 export default function Home() {
   const [thoughts, setThoughts] = useState([]);
+  const [thoughtTop, setThoughtTop] = useState({});
 
   async function getAllThoughts() {
-    const response = await findAllThoughts();
-    setThoughts(response.data.results);
+    const responseThought = await findAllThoughts();
+    setThoughts(responseThought.data.results);
+
+    const responseThoughtTop = await getTopThought()
+    setThoughtTop(responseThoughtTop.data.thoughts)
   }
 
   useEffect(() => {
     getAllThoughts();
-  }, []); // O array vazio indica que o efeito deve ser executado apenas uma vez, após a montagem do componente
+  }, []); 
 
   return (
     <>
       <Navbar />
+      <HomeHeader>
+      <Card
+            top={"true"}
+            username={thoughtTop.username}
+            createdAt= {thoughtTop.createdAt}
+            title={thoughtTop.title}
+            text={thoughtTop.text}
+            likes={thoughtTop.likes}
+            comments={thoughtTop.comments}
+          />
+
+      </HomeHeader>
       <HomeBody>
         {thoughts.map((item) => (
           <Card
@@ -31,8 +45,8 @@ export default function Home() {
             createdAt= {item.createdAt}
             title={item.title}
             text={item.text}
-            likes={item.likes.length}
-            comments={item.comments.length}
+            likes={item.likes}
+            comments={item.comments}
           />
         ))}
       </HomeBody>
