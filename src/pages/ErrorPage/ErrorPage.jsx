@@ -1,4 +1,4 @@
-import { useRouteError } from "react-router-dom";
+import { useRouteError, Link } from "react-router-dom";
 import { ContainerError } from "./ErrorPageStyled";
 
 export default function ErrorPage() {
@@ -7,10 +7,14 @@ export default function ErrorPage() {
   return (
     <ContainerError>
       <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
+      <p>Desculpe aconteceu um erro.</p>
       <p>
         <i>{error.statusText || error.message}</i>
       </p>
+      <Link to="/" >
+      <button>Volte a Página Principal :)</button>
+      </Link>
+
     </ContainerError>
   );
 }
