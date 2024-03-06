@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import logo from "../../assets/shared-brains-logo.png";
 import { Button, ImageLogo, InputSearch, Nav } from "./NavbarStyled";
 
@@ -21,6 +22,7 @@ export default function Navbar() {
         </Button>
      
       </Nav>
+      <Outlet/>
     </>
   );
 }
