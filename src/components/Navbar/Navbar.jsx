@@ -1,11 +1,31 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/shared-brains-logo.png";
-import { Button, ImageLogo, InputSearch, Nav } from "./NavbarStyled";
+import { Button, ErrorSpan, ImageLogo, InputSearch, Nav } from "./NavbarStyled";
 import {useForm} from "react-hook-form"
+import {z} from "zod"
+import {zodResolver} from "@hookform/resolvers/zod"
+
+
+
+const searchSchema = z.object({
+  title: z
+    .string()
+    .nonempty({ message: "The search can't be empty" })
+    .refine((value) => !/^\s*$/.test(value), {
+      message: "The search can't have just spaces",
+    }),
+});
 
 export default function Navbar() {
 
-  const {register, handleSubmit, reset} = useForm()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(searchSchema),
+  });
   const navigate = useNavigate()
   function onSearch (data) {
 
@@ -40,10 +60,14 @@ export default function Navbar() {
         </Button>
      
       </Nav>
+      
+      {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>}
+      
+      
       <Outlet/>
     </>
   );
-}
+  }
 
 
 

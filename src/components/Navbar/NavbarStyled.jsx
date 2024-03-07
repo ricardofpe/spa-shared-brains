@@ -82,3 +82,18 @@ text-transform: uppercase;
   }
 
 `
+
+export const ErrorSpan = styled.span`
+  background-color: #ffcdcd;
+  color: #9e0000;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  border-radius: 7px;
+  top: 180px;
+  left: 50%;
+            transform: translateX(-50%);
+
+  position: absolute;
+`;
