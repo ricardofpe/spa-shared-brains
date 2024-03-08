@@ -13,3 +13,9 @@ export function getTopThought(){
     return response
     
 }
+
+export function searchThoughtsByTitle(title){
+    const response = axios.get(`${baseURL}/thoughts/search?title=${title}`)
+    return response
+    
+}

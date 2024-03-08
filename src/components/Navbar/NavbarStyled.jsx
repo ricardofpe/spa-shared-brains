@@ -14,7 +14,7 @@ export const Nav = styled.nav`
 `
 export const ImageLogo = styled.img`
 max-width: 10rem;
-   
+
    object-fit: cover;
    cursor: pointer;
 `

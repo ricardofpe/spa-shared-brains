@@ -10,9 +10,9 @@ import {zodResolver} from "@hookform/resolvers/zod"
 const searchSchema = z.object({
   title: z
     .string()
-    .nonempty({ message: "The search can't be empty" })
+    .nonempty({ message: "A pesquisa não pode ser vazia" })
     .refine((value) => !/^\s*$/.test(value), {
-      message: "The search can't have just spaces",
+      message: "A pesquisa não pode ter apenas espaços",
     }),
 });
 
@@ -54,10 +54,12 @@ export default function Navbar() {
         <ImageLogo src={logo} alt="Logo Shared Brains" />
         </Link>
       
-
-        <Button >
+<Link to="/auth">
+<Button >
             Entrar
         </Button>
+</Link>
+    
      
       </Nav>
       
