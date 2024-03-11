@@ -25,7 +25,8 @@ export const Section = styled.section`
   justify-content: center;
 
   width: 100%;
-  height: 400px;
+  min-height: 450px;
+  max-height: 600px;
   margin: 0rem 1rem;
   padding: 2rem;
   gap: 1rem;
@@ -51,3 +52,15 @@ background-color: #fff;
 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;;;
 
 `
+
+
+export const ErrorSpanAuthentification = styled.span`
+  background-color: #ffe1e1;
+  color: #8d1212;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  border-radius: 7px;
+display: flex;
+`;

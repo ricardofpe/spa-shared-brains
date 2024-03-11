@@ -2,19 +2,11 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/shared-brains-logo.png";
 import { Button, ErrorSpan, ImageLogo, InputSearch, Nav } from "./NavbarStyled";
 import {useForm} from "react-hook-form"
-import {z} from "zod"
+import { searchSchema } from "../../schemas/searchSchema";
 import {zodResolver} from "@hookform/resolvers/zod"
 
 
 
-const searchSchema = z.object({
-  title: z
-    .string()
-    .nonempty({ message: "A pesquisa não pode ser vazia" })
-    .refine((value) => !/^\s*$/.test(value), {
-      message: "A pesquisa não pode ter apenas espaços",
-    }),
-});
 
 export default function Navbar() {
 

@@ -4,21 +4,27 @@ import { ImageLogo } from "../../components/Navbar/NavbarStyled";
 import { ContainerAuth, ContainerLogo, Section } from "./AuthenticationStyled";
 import logo from "../../assets/shared-brains-logo.png";
 import { Link } from "react-router-dom";
-
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { signinSchema} from "../../schemas/signinSchema";
+import { signupSchema } from "../../schemas/signupSchema";
+import { ErrorSpanAuthentification } from "./AuthenticationStyled";
+
+
+
 export default function Authentication() {
 
   const {
     register: registerSignup,
     handleSubmit: handleSubmitSignup,
-
-  } = useForm();
+    formState: { errors: errorsSignup },
+  } = useForm({ resolver: zodResolver(signupSchema) });
 
   const {
     register: registerSignin,
     handleSubmit: handleSubmitSignin,
-
-  } = useForm();
+    formState: { errors: errorsSignin },
+  } = useForm({ resolver: zodResolver(signinSchema) });
 
   function inHandleSubmit(data){
     console.log(data)
@@ -40,58 +46,72 @@ export default function Authentication() {
     <ContainerAuth>
 
 
-
-      <Section type="signin">
-     <h2>Entrar</h2>
-     <form onSubmit={handleSubmitSignin(inHandleSubmit)}>
-      <Input
-      type="email"
-      placeholder="Email"
-      name="email"
-      register={registerSignin}
-      />
-        <Input
-      type="password"
-      placeholder="Senha"
-      name="password"
-      register={registerSignin}
-      />
-           <Button type="submit" text="Entrar"/>
-     </form >
-
+    <Section type="signin">
+        <h2>Entrar</h2>
+        <form onSubmit={handleSubmitSignin(inHandleSubmit)}>
+          <Input
+            type="email"
+            placeholder="E-mail"
+            name="email"
+            register={registerSignin}
+          />
+          {errorsSignin.email && (
+            <ErrorSpanAuthentification>{errorsSignin.email.message}</ErrorSpanAuthentification>
+          )}
+          <Input
+            type="password"
+            placeholder="Senha"
+            name="password"
+            register={registerSignin}
+          />
+          {errorsSignin.password && (
+            <ErrorSpanAuthentification>{errorsSignin.password.message}</ErrorSpanAuthentification>
+          )}
+          <Button type="submit" text="Entrar" />
+        </form>
       </Section>
 
-      
       <Section type="signup">
         <h2>Cadastrar</h2>
         <form onSubmit={handleSubmitSignup(upHandleSubmit)}>
-        <Input
-      type="text"
-      placeholder="Nome"
-      name="name"
-      register={registerSignup}
-      />
-      <Input
-      type="email"
-      placeholder="Email"
-      name="email"
-      register={registerSignup}
-      />
-        <Input
-      type="password"
-      placeholder="Senha"
-      name="password"
-      register={registerSignup}
-      />
-            <Input
-      type="password"
-      placeholder="Confirmar senha"
-      name="password"
-      register={registerSignup}
-      />
-           <Button type="submit" text="Cadastrar"/>
-     </form>
-
+          <Input
+            type="text"
+            placeholder="Nome"
+            name="name"
+            register={registerSignup}
+          />
+          {errorsSignup.name && (
+            <ErrorSpanAuthentification>{errorsSignup.name.message}</ErrorSpanAuthentification>
+          )}
+          <Input
+            type="email"
+            placeholder="E-mail"
+            name="email"
+            register={registerSignup}
+          />
+          {errorsSignup.email && (
+            <ErrorSpanAuthentification>{errorsSignup.email.message}</ErrorSpanAuthentification>
+          )}
+          <Input
+            type="password"
+            placeholder="Senha"
+            name="password"
+            register={registerSignup}
+          />
+          {errorsSignup.password && (
+            <ErrorSpanAuthentification>{errorsSignup.password.message}</ErrorSpanAuthentification>
+          )}
+          <Input
+            type="password"
+            placeholder="Confirmar senha"
+            name="confirmPassword"
+            register={registerSignup}
+          />
+          {errorsSignup.confirmPassword && (
+            <ErrorSpanAuthentification>{errorsSignup.confirmPassword.message}</ErrorSpanAuthentification>
+          )}
+          <Button type="submit" text="Cadastrar" />
+        </form>
       </Section>
 
 
