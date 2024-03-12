@@ -3,12 +3,14 @@ import { Input } from "../../components/Input/Input";
 import { ImageLogo } from "../../components/Navbar/NavbarStyled";
 import { ContainerAuth, ContainerLogo, Section } from "./AuthenticationStyled";
 import logo from "../../assets/shared-brains-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signinSchema} from "../../schemas/signinSchema";
 import { signupSchema } from "../../schemas/signupSchema";
 import { ErrorSpanAuthentification } from "./AuthenticationStyled";
+import { signup } from "../../services/userServices";
+import Cookies from "js-cookie";
 
 
 
@@ -29,10 +31,20 @@ export default function Authentication() {
   function inHandleSubmit(data){
     console.log(data)
   }
+ 
+ async function upHandleSubmit(data){
+   
+    try{
+      const response = await signup(data)
 
-  function upHandleSubmit(data){
-    console.log(data)
+      Cookies.set("token", response.data.token, {expires: 1})
+      navigate("/")
+    }catch(error){
+      console.log(error)
+    }
   }
+
+  const navigate = useNavigate()
 
   return (
 <>

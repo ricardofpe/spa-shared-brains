@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import Card from "../../components/Cards/Card";
 
 import { findAllThoughts, getTopThought } from "../../services/postsServices";
@@ -20,6 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     getAllThoughts();
+    console.log(Cookies.get("token"))
   }, []); 
 
   return (
