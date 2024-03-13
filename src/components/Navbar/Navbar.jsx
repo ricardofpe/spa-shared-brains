@@ -5,8 +5,10 @@ import { useForm } from "react-hook-form";
 import { searchSchema } from "../../schemas/searchSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userLogged } from "../../services/userServices";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { useContext } from "react";
+import { UserContext } from "../../Context/UserContext";
 
 export default function Navbar() {
   const {
@@ -18,7 +20,8 @@ export default function Navbar() {
     resolver: zodResolver(searchSchema),
   });
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  const {user, setUser} = useContext(UserContext)
+
   function onSearch(data) {
     const { title } = data;
     navigate(`search/${title}`);
@@ -67,7 +70,7 @@ export default function Navbar() {
 
         {user ? (
           <UserLoggedSpace >
-           <Link to="/profile">
+           <Link style={{textDecoration: "none"}}  to="/profile">
            <h2>{user.name}</h2>
            </Link>
              
