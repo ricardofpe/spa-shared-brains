@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { signinSchema} from "../../schemas/signinSchema";
 import { signupSchema } from "../../schemas/signupSchema";
 import { ErrorSpanAuthentification } from "./AuthenticationStyled";
-import { signup } from "../../services/userServices";
+import { signin, signup } from "../../services/userServices";
 import Cookies from "js-cookie";
 
 
@@ -28,16 +28,25 @@ export default function Authentication() {
     formState: { errors: errorsSignin },
   } = useForm({ resolver: zodResolver(signinSchema) });
 
-  function inHandleSubmit(data){
-    console.log(data)
+ async function inHandleSubmit(data){
+    try{
+      const response = await signin(data)
+      Cookies.set("id", response.data.id)
+
+      Cookies.set("token", response.data.token, {expires: 1})
+      navigate("/")
+    }catch(error){
+      console.log(error)
+    }
   }
  
  async function upHandleSubmit(data){
    
     try{
       const response = await signup(data)
-
-      Cookies.set("token", response.data.token, {expires: 1})
+      Cookies.set("id", response.data.id)
+   
+      Cookies.set("token", response.data, {expires: 1})
       navigate("/")
     }catch(error){
       console.log(error)

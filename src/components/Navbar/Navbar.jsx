@@ -1,15 +1,14 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/shared-brains-logo.png";
-import { Button, ErrorSpan, ImageLogo, InputSearch, Nav } from "./NavbarStyled";
-import {useForm} from "react-hook-form"
+import { Button, ErrorSpan, ImageLogo, InputSearch, Nav, UserLoggedSpace } from "./NavbarStyled";
+import { useForm } from "react-hook-form";
 import { searchSchema } from "../../schemas/searchSchema";
-import {zodResolver} from "@hookform/resolvers/zod"
-
-
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import { userLogged } from "../../services/userServices";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
-
   const {
     register,
     handleSubmit,
@@ -18,50 +17,76 @@ export default function Navbar() {
   } = useForm({
     resolver: zodResolver(searchSchema),
   });
-  const navigate = useNavigate()
-  function onSearch (data) {
-
-    const {title} = data
-     navigate(`search/${title}`)
-     reset()
-
+  const navigate = useNavigate();
+  const [user, setUser] = useState({});
+  function onSearch(data) {
+    const { title } = data;
+    navigate(`search/${title}`);
+    reset();
   }
+
+  async function findUserLogged() {
+    try {
+      const response = await userLogged();
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function signout() {
+    Cookies.remove("token");
+    setUser(undefined);
+    navigate("/");
+  }
+
+  useEffect(() => {
+    if (Cookies.get("token")) findUserLogged();
+  }, []);
 
   return (
     <>
       <Nav>
         <form onSubmit={handleSubmit(onSearch)}>
-        <InputSearch className="input-search">
-     
-     <button type="submit" >
-     <i className="bi bi-search"></i>
-     </button>
+          <InputSearch className="input-search">
+            <button type="submit">
+              <i className="bi bi-search"></i>
+            </button>
 
-        
-          <input {...register("title")} placeholder="Pesquise por um título" type="text" />
-        </InputSearch>
+            <input
+              {...register("title")}
+              placeholder="Pesquise por um título"
+              type="text"
+            />
+          </InputSearch>
         </form>
 
-<Link to="/">
-        <ImageLogo src={logo} alt="Logo Shared Brains" />
+        <Link to="/">
+          <ImageLogo src={logo} alt="Logo Shared Brains" />
         </Link>
-      
-<Link to="/auth">
-<Button >
-            Entrar
-        </Button>
-</Link>
-    
-     
+
+        {user ? (
+          <UserLoggedSpace >
+           <Link to="/profile">
+           <h2>{user.name}</h2>
+           </Link>
+             
+           
+
+            <i className="bi bi-box-arrow-right" onClick={signout}></i>
+          </UserLoggedSpace>
+        ) : (
+          <Link to="/auth">
+            <Button type="button" text="Entrar">
+              Entrar
+            </Button>
+          </Link>
+        )}
       </Nav>
-      
+
       {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>}
-      
-      
-      <Outlet/>
+
+      <Outlet />
     </>
   );
-  }
-
-
-
+}

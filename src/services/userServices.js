@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookies from 'js-cookie';
 
 const baseURL = "http://localhost:3000"
 
@@ -14,3 +15,26 @@ function generateUserName(name) {
     const randomNumber = Math.floor(Math.random() * 1000);
     return `${nameLowerCaseWithoutSpaces}-${randomNumber}`;
   }
+
+  export function signin(data) {
+    const response = axios.post(`${baseURL}/auth`, data);
+    return response;
+  }
+
+  export function userLogged() {
+
+    try{
+        const response = axios.get(`${baseURL}/user/${Cookies.get("id")}`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        }
+      });
+      return response;
+
+    }catch(error){
+      console.log("Not found user!", error)
+    }
+    
+ 
+  }
+
