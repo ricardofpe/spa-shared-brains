@@ -31,7 +31,7 @@ export default function Authentication() {
  async function inHandleSubmit(data){
     try{
       const response = await signin(data)
-      Cookies.set("id", response.data.id)
+      Cookies.set("id", response.data.id , {expires: 1})
 
       Cookies.set("token", response.data.token, {expires: 1})
       navigate("/")
@@ -44,7 +44,7 @@ export default function Authentication() {
    
     try{
       const response = await signup(data)
-      Cookies.set("id", response.data.id)
+      Cookies.set("id", response.data.id , {expires: 1})
    
       Cookies.set("token", response.data, {expires: 1})
       navigate("/")

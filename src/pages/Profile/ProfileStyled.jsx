@@ -7,6 +7,7 @@ flex-direction: column;
 align-items: center;
 top: 200px;
 position: relative;
+height: 100vh;
 `
 
 export const ProfileHeader = styled.div`
@@ -93,5 +94,17 @@ transition: all 0.3s ease-in-out;
     color:#0a86af;
     font-size: 2.1rem;
 }
+
+`
+
+export const ProfileThoughts = styled.div`
+
+display: grid;
+position: relative;
+top: -170px;
+grid-template-columns: repeat(2,1fr);
+grid-gap: 3rem;
+margin: 1rem auto;
+width: 80%;
 
 `

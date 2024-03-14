@@ -1,12 +1,27 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../Context/UserContext"
-import { ContainerProfile, ProfileActions, ProfileAvatar, ProfileBackground, ProfileHeader, ProfileIconAdd, ProfileIconEdit, ProfileUser } from "./ProfileStyled"
+import { ContainerProfile, ProfileActions, ProfileAvatar, ProfileBackground, ProfileHeader, ProfileIconAdd, ProfileIconEdit, ProfileThoughts, ProfileUser } from "./ProfileStyled"
 
 import userImg from '../../assets/user.png'
+import Card from "../../components/Cards/Card"
+import { getAllThoughtsByUser } from "../../services/postsServices"
 
 export default function Profile() {
 
     const {user} = useContext(UserContext)
+    const [thoughts, setThoughts] = useState([])
+
+    async function findAllThoughtsByUser(){
+        const thoughtsResponse = await getAllThoughtsByUser()
+        setThoughts(thoughtsResponse.data.results)
+        console.log(thoughtsResponse.data.results)
+    }
+
+    useEffect(()=> {
+        findAllThoughtsByUser()
+    },[]) 
+
+
   return (
    <>
    <ContainerProfile>
@@ -34,8 +49,27 @@ export default function Profile() {
             <i className="bi bi-plus-circle"></i>
         </ProfileIconAdd>
     </ProfileActions>
+
+
    </ProfileHeader>
-      
+   <ProfileThoughts>
+{thoughts.map((thought) =>(
+     (
+        <Card
+        key={thought.id}
+        username={thought.username}
+        createdAt= {thought.createdAt}
+        title={thought.title}
+        text={thought.text}
+        likes={thought.likes}
+        comments={thought.comments}
+      />
+
+
+    )
+))}
+</ProfileThoughts>
+
 
    </ContainerProfile>
    </>
