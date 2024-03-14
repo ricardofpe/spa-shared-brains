@@ -8,6 +8,17 @@ align-items: center;
 top: 200px;
 position: relative;
 height: 100vh;
+
+.h2{
+    grid-column: 1/-1;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0c86af;
+    margin-top: 1rem;
+}
+
+
 `
 
 export const ProfileHeader = styled.div`
@@ -106,5 +117,7 @@ grid-template-columns: repeat(2,1fr);
 grid-gap: 3rem;
 margin: 1rem auto;
 width: 80%;
+
+
 
 `

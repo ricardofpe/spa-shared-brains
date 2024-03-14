@@ -14,7 +14,7 @@ export default function Profile() {
     async function findAllThoughtsByUser(){
         const thoughtsResponse = await getAllThoughtsByUser()
         setThoughts(thoughtsResponse.data.results)
-        console.log(thoughtsResponse.data.results)
+
     }
 
     useEffect(()=> {
@@ -53,7 +53,12 @@ export default function Profile() {
 
    </ProfileHeader>
    <ProfileThoughts>
+
+   
 {thoughts.map((thought) =>(
+
+
+
      (
         <Card
         key={thought.id}
@@ -68,8 +73,10 @@ export default function Profile() {
 
     )
 ))}
-</ProfileThoughts>
 
+
+</ProfileThoughts>
+{thoughts.length === 0 ? (<h2 className="h2">Você ainda não fez Pensamentos...</h2>) : (null)}
 
    </ContainerProfile>
    </>
