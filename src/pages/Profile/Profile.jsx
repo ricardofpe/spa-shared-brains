@@ -62,7 +62,8 @@ export default function Profile() {
               title={thought.title}
               text={thought.text}
               likes={thought.likes}
-              comments={thought.comments}
+                  comments={thought.comments}
+                  actions={true}
             />
           ))}
         </ProfileThoughts>

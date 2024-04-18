@@ -31,6 +31,14 @@ export const CardContainer = styled.section`
     padding-bottom: 0.6em;
   }
 
+  i {
+    cursor: pointer;
+    color: #0bade3;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border: none;
+    margin: 2px;
+  }
 
 
 

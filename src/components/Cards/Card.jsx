@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import TextLimit from "../TextLimit/TextLimit";
 import { CardContainer, CardThought, ContainerCardFooter, ContainerDataandByUser, ContainerLikeandComment } from "./CardStyle";
 
-function Card({ title, text, username, likes, comments, createdAt, top }) {
+function Card({ title, text, username, likes, comments, createdAt, top, actions = false, id }) {
 
   const dateObject = new Date(createdAt);
 
@@ -18,6 +19,17 @@ function Card({ title, text, username, likes, comments, createdAt, top }) {
     <CardContainer >
       <CardThought top={top} >
         <div>
+
+        {actions && (
+              <span>
+                <Link to={`/manage-news/edit/${id}`}>
+                  <i className="bi bi-pencil-square"></i>
+                </Link>
+                <Link to={`/manage-news/delete/${id}`}>
+                  <i className="bi bi-trash3"></i>
+                </Link>
+              </span>
+            )}
           <h2>{title}</h2>
           <TextLimit text={text} limit={150}/>
           
