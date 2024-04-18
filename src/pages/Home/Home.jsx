@@ -1,4 +1,5 @@
 
+
 import Card from "../../components/Cards/Card";
 
 import { findAllThoughts, getTopThought } from "../../services/postsServices";
@@ -52,6 +53,9 @@ export default function Home() {
           />
         ))}
       </HomeBody>
+
+
+                 
     </>
   );
 }

@@ -35,3 +35,45 @@ export function getAllThoughtsByUser(){
     }
     
 }
+export function createThought(body) {
+  try {
+
+    const response = axios.post(`${baseURL}/thoughts`, body, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    });
+    return response;
+    
+  } catch (error) {
+    console.log(error)
+  }
+ 
+}
+
+export function getThoughtById(id) {
+  const response = axios.get(`${baseURL}/thoughts/${id}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
+
+export function editThought(body, id) {
+  const response = axios.patch(`${baseURL}/thoughts/${id}`, body, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
+
+export function deleteThought (id) {
+  const response = axios.delete(`${baseURL}/thoughts/${id}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
