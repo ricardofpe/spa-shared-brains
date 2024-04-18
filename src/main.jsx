@@ -35,9 +35,9 @@ const router = createBrowserRouter([
         element: <Profile/>
       },
       {
-        path: "manage-thoughts/:action",
+        path: "manage-thoughts/:action/:id",
         element: <ManageThoughts/>
-      }
+      },
     ]
   },
   {

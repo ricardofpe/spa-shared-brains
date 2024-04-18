@@ -46,7 +46,7 @@ export default function Profile() {
           </ProfileUser>
 
           <ProfileActions>
-            <Link to="/manage-thoughts/add">
+            <Link to="/manage-thoughts/add/thought">
               <ProfileIconAdd>
                 <i className="bi bi-plus-circle"></i>
               </ProfileIconAdd>
@@ -56,7 +56,8 @@ export default function Profile() {
         <ProfileThoughts>
           {thoughts.map((thought) => (
             <Card
-              key={thought.id}
+                  key={thought.id}
+                  id={thought.id}
               username={thought.username}
               createdAt={thought.createdAt}
               title={thought.title}
