@@ -34,9 +34,7 @@ export function ManageThoughts() {
     } catch (error) {
       console.log(error);
     }
-    }
-
-    
+  }
 
   async function editThoughtsSubmit(data) {
     try {
@@ -84,7 +82,7 @@ export function ManageThoughts() {
       </h2>
       <form
         onSubmit={
-          action == "add"
+            action == "add"
             ? handleRegisterThoughts(registerThoughtsSubmit)
             : action === "edit"
             ? handleRegisterThoughts(editThoughtsSubmit)
